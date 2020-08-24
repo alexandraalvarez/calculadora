@@ -1,102 +1,124 @@
 function init(){
-
 }
 
-//variable tecla presionada para saber si es un número o no
-//necesito una variable para guardar los numeros tecleados hasta antes de poner un operador, validar que sea numero
-//necesito otra variable para guardar el operador, validar que sea símbolo
-//otra variable para el otro numero
-//variable de resultado temporal
-//variable resultado definitivo
-//funciones para cada símbolo (suma, resta, multiplicacion, division, igual, limpiar "C")
+//Variables para los números
+var cero = document.getElementById("cero");
+var uno = document.getElementById("uno");
+var dos = document.getElementById("dos");
+var tres = document.getElementById("tres");
+var cuatro = document.getElementById("cuatro");
+var cinco = document.getElementById("cinco");
+var seis = document.getElementById("seis");
+var siete = document.getElementById("siete");
+var ocho = document.getElementById("ocho");
+var nueve = document.getElementById("nueve");
 
-var teclaClick = "";
+//Variables para elegir operaciones
+var suma = document.getElementById("suma");
+var resta = document.getElementById("resta");
+var multiplicacion = document.getElementById("multiplicacion");
+var division = document.getElementById("division");
+var igual = document.getElementById("igual");
+var reset = document.getElementById("reset");
+var resultado = document.getElementById('resultado');
+
+//variables para ejecutar operaciones
 var numero1 = "";
 var numero2 = ""; 
 var operador = ""; 
-var acumulador = 0; 
 var resultadoFinal = "";
 
-//Función para filtrar todas las teclas y definir si son numero o simbolo
-function getSymbol() {
-    
+//Para las teclas presionadas numeros y letra C
+cero.onclick = function(e){
+    resultado.textContent += "0";
+}
+uno.onclick = function(e){
+    resultado.textContent += "1";
+}
+dos.onclick = function(e){
+    resultado.textContent += "2";
+}
+tres.onclick = function(e){
+    resultado.textContent += "3";
+}
+cuatro.onclick = function(e){
+    resultado.textContent += "4";
+}
+cinco.onclick = function(e){
+    resultado.textContent += "5";
+}
+seis.onclick = function(e){
+    resultado.textContent += "6";
+}
+siete.onclick = function(e){
+    resultado.textContent += "7";
+}
+ocho.onclick = function(e){
+    resultado.textContent += "8";
+}
+nueve.onclick = function(e){
+    resultado.textContent += "9";
+}
+reset.onclick = function(e) {
+    resetVar();
+} 
+
+
+//funciones para los operadores
+suma.onclick = function(e){
+    numero1 = resultado.textContent;
+    operador = "+";
+    resultado.textContent = "";
+}
+resta.onclick = function(e){
+    numero1 = resultado.textContent;
+    operador = "-";
+    resultado.textContent = "";
+}
+multiplicacion.onclick = function(e){
+    numero1 = resultado.textContent;
+    operador = "*";
+    resultado.textContent = "";
+}
+division.onclick = function(e){
+    numero1 = resultado.textContent;
+    operador = "/";
+    resultado.textContent = "";
 }
 
-//Función suma 
-function suma(){
-
-   var sumaResult = numero1 + numero2;
-   return acumulador = sumaResult;
-}
-
-//Funcion resta
-function resta(){
-
-    var restaResult = numero1 - numero2;
-    return acumulador = restaResult;
-}
-
-//Función multiplicación
-function multiplica(){
-
-    var multiplicaResult = numero1 * numero2;
-    return acumulador = multiplicaResult;
-}
-
-//Función división
-function divide(){
-
-    var divideResult = numero1 / numero2;
-    return acumulador = divideResult;
-}
-
-//Función reset variables ******** falta agregar que la pantalla no muestre nada
+//Función reset variables 
 function resetVar(){
-    
-    acumulador = 0;
-    resultadoFinal = 0;
-    numero1 = "";
-    numero2 = "";
+    resultado.textContent = "";
+    numero1 = 0;
+    numero2 = 0;
     operador = "";
 }
 
-//Función para obtener signos presionados
-switch (operador) {
-    case "+":
-        suma(numero1, numero2);
-        break;    
-
-    case "-":
-        resta(numero1,numero2);
-        break;
-
-    case "*":
-        multiplica(numero1,numero2);    
-        break;
-
-    case "/":
-        multiplica(numero1,numero2);
-        break;
-        
-    case "C":
-        resetVar();
-        break;
-
-    case "=":
-        resultadoFinal = acumulador;
-        document.getElementById("resultado").innerHTML = resultadoFinal;  
+// Para mostrar la solución al poner igual
+igual.onclick = function(e){
+    numero2 = resultado.textContent;
+    resulOperacion();
 }
 
-//Si la tecla presionada es un numero, ejecuta get number, si no es un numero, ejecuta el switch
-if (document.getElementById())
-
-//Función para obtener valores números presionados
-function getNumber() {
-    numero1 = document.getElementById("uno").value;  
-    
-}
-
-//Función para mostrar el resultado en la pantalla
-function showResult() {
-    document.getElementById("resultado").innerHTML = resultadoFinal;
+//funcion resultado operación
+function resulOperacion(){
+    var resultadoFinal = 0;
+    switch(operador){
+      case "+":
+        resultadoFinal = parseFloat(numero1) + parseFloat(numero2);
+        break;
+      case "-":
+        resultadoFinal = parseFloat(numero1) - parseFloat(numero2);
+          break;
+      case "*":
+        resultadoFinal = parseFloat(numero1) * parseFloat(numero2);
+        break;
+      case "/":
+        resultadoFinal= parseFloat(numero1) / parseFloat(numero2);
+        break;
+      default:
+        break;
+    }
+    resetVar();
+    resultado.textContent = resultadoFinal;
 }
